@@ -19,12 +19,12 @@ void Player::create() {
 
 	activeTouches = 1;
 
-	addSkin();
+	addSkin(50);
 }
 
-void Player::addSkin() {
+void Player::addSkin(int speed) {
 	isLive = true;
-	_speed = 30 + CCRANDOM_0_1()*300;
+	_speed = 30 + CCRANDOM_0_1()*speed;
 	_viewSize = 40 + CCRANDOM_0_1()*30;
 
 	CCParticleSystem* skin = new CCParticleSystem();
@@ -131,11 +131,6 @@ void Player::tick(float dt) {
 		if (activeTouches == 1 && i > 0) {
 			CCParticleSystem* first = _skins->at(0);
 			moveTo(i, first->getPositionX(), first->getPositionY());
-			if (checkClonePos(i)) {
-				removeSkin(i);
-				i--;
-				continue;
-			}
 		}
 		CCPoint* target = _targets->at(i);
 		CCPoint* velocity = _velocityes->at(i);
@@ -153,18 +148,6 @@ void Player::tick(float dt) {
 	}
 }
 
-bool Player::checkClonePos(int id) {
-	CCParticleSystem *front = _skins->at(0);
-	CCParticleSystem *skin = _skins->at(id);
-
-	CCPoint pos = skin->getPosition();
-	int dx = front->getPositionX() - pos.x;
-	int dy = front->getPositionY() - pos.y;
-	if (abs(dx) <= 10 && abs(dy) <= 10) {
-		return true;
-	}
-	return false;
-}
 
 void Player::setSkin(int id, CCParticleSystem *item) {
 	CCParticleSystem* skin = _skins->at(id);

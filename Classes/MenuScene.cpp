@@ -83,7 +83,7 @@ CCFiniteTimeAction* MenuScene::getAsteroidAnimationForBtn(SEL_CallFunc callback)
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
     CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
     
-    CCMoveTo *actionMove = CCMoveTo::create(1, ccp(origin.x + arc4random() % (int)visibleSize.width, origin.y + -100));
+    CCMoveTo *actionMove = CCMoveTo::create(1, ccp(origin.x + CCRANDOM_0_1() * (int)visibleSize.width, origin.y + -100));
 	CCFiniteTimeAction* action = CCSequence::create(actionMove, CCCallFunc::create(this, callback), NULL);
     
 	return action;

@@ -1,1 +1,10 @@
 .DS_Store
+proj.android
+proj.blackberry
+proj.linux
+proj.ios
+proj.mac
+proj.marmalade
+proj.win32
+proj.winrt
+proj.wp8

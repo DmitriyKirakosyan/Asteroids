@@ -16,7 +16,7 @@ public:
 	Player();
 
 	void create();
-	void addSkin();
+	void addSkin(int speed);
 	void removeSkin(int id);
 	std::vector<CCParticleSystem*>* getNodes();
 	void tick(float dt);
@@ -37,7 +37,6 @@ public:
 
 
 private:
-	bool checkClonePos(int id);
 
 	int _viewSize;
 	int _rectSize;

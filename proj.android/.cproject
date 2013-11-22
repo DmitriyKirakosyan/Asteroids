@@ -55,6 +55,20 @@
 									<listOptionValue builtIn="false" value="/sources/cxx-stl/gnu-libstdc++/4.6/libs/armeabi-v7a/include"/>
 									<listOptionValue builtIn="false" value="/platforms/android-8/arch-arm/usr/include"/>
 									<listOptionValue builtIn="false" value="/sources/cxx-stl/stlport/stlport"/>
+									<listOptionValue builtIn="false" value="/home/probigi/development/cocos2d-x/cocos2d-x-2.2.0/extensions"/>
+									<listOptionValue builtIn="false" value="/home/probigi/development/cocos2d-x/cocos2d-x-2.2.0/CocosDenshion/include"/>
+									<listOptionValue builtIn="false" value="/home/probigi/development/cocos2d-x/cocos2d-x-2.2.0/cocos2dx/kazmath/include"/>
+									<listOptionValue builtIn="false" value="/home/probigi/development/cocos2d-x/cocos2d-x-2.2.0/cocos2dx/platform/linux"/>
+									<listOptionValue builtIn="false" value="/home/probigi/development/cocos2d-x/cocos2d-x-2.2.0/cocos2dx/platform/third_party/linux"/>
+									<listOptionValue builtIn="false" value="/home/probigi/development/cocos2d-x/cocos2d-x-2.2.0/external"/>
+									<listOptionValue builtIn="false" value="/usr/local/include"/>
+									<listOptionValue builtIn="false" value="/usr/include/x86_64-linux-gnu/c++/4.7"/>
+									<listOptionValue builtIn="false" value="/usr/include/c++/4.7"/>
+									<listOptionValue builtIn="false" value="/usr/include/c++/4.7/backward"/>
+									<listOptionValue builtIn="false" value="/usr/include/x86_64-linux-gnu"/>
+									<listOptionValue builtIn="false" value="/usr/lib/gcc/x86_64-linux-gnu/4.7/include"/>
+									<listOptionValue builtIn="false" value="/usr/lib/gcc/x86_64-linux-gnu/4.7/include-fixed"/>
+									<listOptionValue builtIn="false" value="/usr/include"/>
 								</option>
 								<option id="org.eclipse.cdt.build.core.settings.holder.symbols.1267721019" name="Symbols" superClass="org.eclipse.cdt.build.core.settings.holder.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="COCOS2DX_ROOT=${ProjDirPath}/../../../"/>
@@ -102,10 +116,8 @@
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
 	</storageModule>
-	<storageModule moduleId="refreshScope" versionNumber="2">
-		<configuration configurationName="Default">
-			<resource resourceType="PROJECT" workspacePath="/HelloCpp"/>
-		</configuration>
+	<storageModule moduleId="refreshScope" versionNumber="1">
+		<resource resourceType="PROJECT" workspacePath="/Asteroids"/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>

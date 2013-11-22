@@ -62,7 +62,9 @@ bool GameScene::init()
 
     NUM_ITEMS = 0;
     MAX_TOUCHES = 3;
+    DIFF_K = 50;
     
+
     _score = 0;
     _gameOver = false;
 
@@ -107,7 +109,7 @@ void GameScene::update(float dt) {
 
 		if (!aster->isLive) {
 			aster->removeSkin(0);
-			aster->addSkin();
+			aster->addSkin(DIFF_K);
 			CCParticleSystem* node = aster->getNodes()->front();
 			this->addChild(node);
 			aster->redraw();
@@ -177,6 +179,7 @@ void GameScene::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
             rect.setRect(rect.getMinX() - rectW, rect.getMinY() - rectH, rectW * 3, rectH * 3);
 			if (rect.containsPoint(target)) {
 				aster->isLive = false;
+				DIFF_K ++;
 			}
 		}
 	}

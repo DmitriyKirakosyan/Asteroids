@@ -22,6 +22,7 @@ public:
 	virtual void ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent);
 	virtual void ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent);
 
+
     // implement the "static node()" method manually
     CREATE_FUNC(GameScene);
 
@@ -33,6 +34,7 @@ private:
     
     void createAndDrawHP();
 
+    int DIFF_K;
     int NUM_ITEMS;
     int MAX_TOUCHES;
     int MAX_ASTERS;
