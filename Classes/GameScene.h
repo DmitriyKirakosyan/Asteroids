@@ -10,6 +10,8 @@ class MapObject;
 class GameScene : public cocos2d::CCLayer
 {
 public:
+    GameScene():MAX_HP(5) {}
+    
     virtual bool init();
 
     static cocos2d::CCScene* scene();
@@ -35,7 +37,7 @@ private:
     int MAX_TOUCHES;
     int MAX_ASTERS;
     
-    const int MAX_HP = 5;
+    const int MAX_HP;
     
     bool _gameOver;
     int _score;

@@ -19,6 +19,8 @@ public:
         if (_instance == NULL) { _instance = new ScoreManager(); }
         return _instance;
     }
+    
+    ScoreManager():SCORE_KEY("score"){}
 
     void saveScore(int score);
     int getScore();
@@ -26,7 +28,7 @@ public:
 private:
     //ScoreManager();
     static ScoreManager* _instance;
-    const char* SCORE_KEY = "score";
+    const char* SCORE_KEY;
 };
 
 #endif /* defined(__Test__ScoreManager__) */
