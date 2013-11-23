@@ -4,13 +4,13 @@
 #include "cocos2d.h"
 USING_NS_CC;
 
-class Player;
-class MapObject;
+class Asteroid;
 
 class GameScene : public cocos2d::CCLayer
 {
 public:
-    GameScene():MAX_HP(5) {}
+    GameScene():MAX_HP(5),MAX_ASTERS(5) {
+    }
     
     virtual bool init();
 
@@ -18,40 +18,27 @@ public:
     
     void menuCloseCallback(CCObject* pSender);
     
-    virtual void ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent);
-	virtual void ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent);
 	virtual void ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent);
 
-
-    // implement the "static node()" method manually
     CREATE_FUNC(GameScene);
 
 private:
     void update(float dt);
-    int checkCollisions(MapObject *item);
     
     void showScore();
     
     void createAndDrawHP();
-
-    int DIFF_K;
-    int NUM_ITEMS;
-    int MAX_TOUCHES;
-    int MAX_ASTERS;
     
+    Asteroid* createAsteroid();
+    void onAsteroidMovingComplete(cocos2d::CCNode* pSender);
+
+    const int MAX_ASTERS;
     const int MAX_HP;
     
     bool _gameOver;
     int _score;
     
-
-    std::vector<MapObject*> *_items;
-    std::vector<Player*> *_asteroids;
-
-
-    Player *_player;
-
-    MapObject *_item;
+    CCArray *_asteroids;
     
     CCArray* _lifeSprites;
 };

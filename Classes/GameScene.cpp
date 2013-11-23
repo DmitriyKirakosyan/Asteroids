@@ -1,6 +1,5 @@
 #include "GameScene.h"
-#include "Player.h"
-#include "MapObject.h"
+#include "Asteroid.h"
 #include "MenuScene.h"
 #include "ScoreManager.h"
 
@@ -31,64 +30,11 @@ bool GameScene::init()
         return false;
     }
     
-    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
-
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
-
-    // add a "close" icon to exit the progress. it's an autorelease object
-    CCMenuItemImage *pCloseItem = CCMenuItemImage::create(
-                                        "CloseNormal.png",
-                                        "CloseSelected.png",
-                                        this,
-                                        menu_selector(GameScene::menuCloseCallback));
+    _asteroids = new CCArray();
     
-	pCloseItem->setPosition(ccp(origin.x + visibleSize.width - pCloseItem->getContentSize().width/2 ,
-                                origin.y + pCloseItem->getContentSize().height/2));
-
-    // create menu, it's an autorelease object
-    CCMenu* pMenu = CCMenu::create(pCloseItem, NULL);
-    pMenu->setPosition(CCPointZero);
-    //this->addChild(pMenu, 1);
-
-    
-    // add "HelloWorld" splash screen"
-    CCSprite* pSprite = CCSprite::create("HelloWorld.png");
-
-    // position the sprite on the center of the screen
-    pSprite->setPosition(ccp(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-
-    NUM_ITEMS = 0;
-    MAX_TOUCHES = 3;
-    DIFF_K = 50;
-    
-
     _score = 0;
     _gameOver = false;
 
-	_items = new std::vector<MapObject*>();
-	for (int i = 0; i < NUM_ITEMS; ++i) {
-		MapObject *item = new MapObject();
-		item->create(i);
-		this->addChild(item->getNode());
-		_items->push_back(item);
-		item->show();
-	}
-
-	MAX_ASTERS = 10;
-
-	_asteroids = new std::vector<Player*>();
-	for (int i = 0; i < MAX_ASTERS; ++i) {
-		Player *aster = new Player();
-		aster->create();
-		CCParticleSystem* node = aster->getNodes()->front();
-		this->addChild(node);
-		_asteroids->push_back(aster);
-		aster->redraw();
-	}
-    
     this->createAndDrawHP();
 
     this->setTouchEnabled(true);
@@ -98,61 +44,15 @@ bool GameScene::init()
 }
 
 void GameScene::update(float dt) {
-	for (int i = 0; i < MAX_ASTERS; ++i) {
-		Player* aster = _asteroids->at(i);
-		aster->tick(dt);
+    
+    
+	for (int i = _asteroids->count(); i < MAX_ASTERS; ++i) {
+        Asteroid* asteroid = this->createAsteroid();
+        _asteroids->addObject(asteroid);
         
-        if (!aster->isLive) { _score++; }
-        bool wasAlive = aster->isLive;
-
-		aster->checkForRemove();
-
-		if (!aster->isLive) {
-			aster->removeSkin(0);
-			aster->addSkin(DIFF_K);
-			CCParticleSystem* node = aster->getNodes()->front();
-			this->addChild(node);
-			aster->redraw();
-            
-            //проверка на потерю хит поинта и геймовер
-            if (wasAlive)
-            {
-                if (_lifeSprites->count() > 0)
-                {
-                    CCSprite* lifeItem = (CCSprite*)_lifeSprites->lastObject();
-                    this->removeChild(lifeItem);
-                    _lifeSprites->removeObject(lifeItem);
-                }
-                else
-                {
-                    //GAME OVER
-                    this->unscheduleUpdate();
-                    this->showScore();
-                    _gameOver = true;
-                    ScoreManager::getInstance()->saveScore(_score);
-                }
-            }
-		}
+        this->addChild(asteroid);
 	}
-}
-
-int GameScene::checkCollisions(MapObject *item) {
-	CCRect rect1 = item->getNode()->boundingBox();
-	for (unsigned i = 0; i < _player->getNodes()->size(); ++i) {
-		CCRect rect2 = _player->getNodes()->at(i)->boundingBox();
-		if (rect2.intersectsRect(rect1)) {
-			return i;
-		}
-	}
-	return -1;
-}
-
-void GameScene::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
-{
-}
-
-void GameScene::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent)
-{
+    
 }
 
 void GameScene::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
@@ -162,27 +62,65 @@ void GameScene::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
         director->replaceScene(MenuScene::scene());
         return;
     }
+    
+    CCArray* asteroidsForRemove = CCArray::create();
 	for(CCSetIterator it = pTouches->begin(); it != pTouches->end(); ++it)
 	{
 		CCTouch *touch = (CCTouch*) *it;
 		CCPoint target = touch->getLocation();
 
-		for (int i = 0; i < MAX_ASTERS; ++i) {
-			Player *aster = _asteroids->at(i);
-			if (!aster->isLive) { continue; }
-			CCRect rect = aster->getNodes()->at(0)->boundingBox();
-            
+		for (int i = 0; i < _asteroids->count(); ++i) {
+			Asteroid *aster = (Asteroid*) _asteroids->objectAtIndex(i);
+			CCRect rect = aster->boundingBox();
+
             //увеличиваем радиус тача для удобства.
             //TODO Перенести в класс Скина
             float rectW = rect.getMaxX() - rect.getMinX();
             float rectH = rect.getMaxY() - rect.getMinY();
             rect.setRect(rect.getMinX() - rectW, rect.getMinY() - rectH, rectW * 3, rectH * 3);
 			if (rect.containsPoint(target)) {
-				aster->isLive = false;
-				DIFF_K ++;
+                this->removeChild(aster);
+                asteroidsForRemove->addObject(aster);
 			}
 		}
+        CCObject* asteroidForRemove;
+        CCARRAY_FOREACH(asteroidsForRemove, asteroidForRemove)
+        {
+            _asteroids->removeObject(asteroidForRemove);
+        }
+        asteroidsForRemove->removeAllObjects();
 	}
+}
+
+Asteroid* GameScene::createAsteroid()
+{
+    Asteroid* result = new Asteroid();
+    
+    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+    CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
+    float randomX = CCRANDOM_0_1() * visibleSize.width;
+    result->setPosition(ccp(origin.x + randomX,
+                            origin.y + visibleSize.height + result->getContentSize().height/2));
+    
+    CCMoveTo* moveAction = CCMoveTo::create(2, ccp(randomX, origin.y - result->getContentSize().height/2));
+    SEL_CallFuncN onMoveToPointCompleteFunc = callfuncN_selector(GameScene::onAsteroidMovingComplete);
+    CCCallFuncN* onComplete = CCCallFuncN::create(this, onMoveToPointCompleteFunc);
+    CCFiniteTimeAction* asteroidAction = CCSequence::create(moveAction, onComplete, NULL);
+    
+    result->runAction(asteroidAction);
+    
+    return result;
+}
+
+void GameScene::onAsteroidMovingComplete(cocos2d::CCNode *pSender)
+{
+    CCLog("asteroid was down..");
+    
+    this->removeChild(pSender);
+    if (_asteroids->containsObject(pSender))
+    {
+        _asteroids->removeObject(pSender);
+    }
 }
 
 void GameScene::createAndDrawHP()
