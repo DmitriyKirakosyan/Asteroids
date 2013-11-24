@@ -1,5 +1,5 @@
 #include "GameScene.h"
-#include "Asteroid.h"
+#include "asteroid/Asteroid.h"
 #include "MenuScene.h"
 #include "ScoreManager.h"
 
