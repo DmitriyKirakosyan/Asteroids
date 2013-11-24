@@ -1,20 +1,20 @@
 obj/local/armeabi/objs/box2d_static/Common/b2Settings.o: \
- /Users/dmitriy/workspace/cocos2d-x-2.1.4/projects/Test/proj.android/../../../external/Box2D/Common/b2Settings.cpp \
- /Users/dmitriy/workspace/cocos2d-x-2.1.4/projects/Test/proj.android/../../../external/Box2D/../Box2D/Common/b2Settings.h \
- /Users/dmitriy/workspace/adt-bundle-mac-x86_64/android-ndk-r8d/sources/cxx-stl/gnu-libstdc++/4.6/include/cassert \
- /Users/dmitriy/workspace/adt-bundle-mac-x86_64/android-ndk-r8d/sources/cxx-stl/gnu-libstdc++/4.6/include/cmath \
- /Users/dmitriy/workspace/adt-bundle-mac-x86_64/android-ndk-r8d/sources/cxx-stl/gnu-libstdc++/4.6/include/cstdlib \
- /Users/dmitriy/workspace/adt-bundle-mac-x86_64/android-ndk-r8d/sources/cxx-stl/gnu-libstdc++/4.6/include/cstdio \
- /Users/dmitriy/workspace/adt-bundle-mac-x86_64/android-ndk-r8d/sources/cxx-stl/gnu-libstdc++/4.6/include/cstdarg
+ /home/probigi/development/cocos2d-x/cocos2d-x-2.2.0/projects/Asteroids/proj.android/../../../external/Box2D/Common/b2Settings.cpp \
+ /home/probigi/development/cocos2d-x/cocos2d-x-2.2.0/projects/Asteroids/proj.android/../../../external/Box2D/../Box2D/Common/b2Settings.h \
+ /home/probigi/lib/android_ndk/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.6/include/cassert \
+ /home/probigi/lib/android_ndk/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.6/include/cmath \
+ /home/probigi/lib/android_ndk/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.6/include/cstdlib \
+ /home/probigi/lib/android_ndk/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.6/include/cstdio \
+ /home/probigi/lib/android_ndk/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.6/include/cstdarg
 
-/Users/dmitriy/workspace/cocos2d-x-2.1.4/projects/Test/proj.android/../../../external/Box2D/../Box2D/Common/b2Settings.h:
+/home/probigi/development/cocos2d-x/cocos2d-x-2.2.0/projects/Asteroids/proj.android/../../../external/Box2D/../Box2D/Common/b2Settings.h:
 
-/Users/dmitriy/workspace/adt-bundle-mac-x86_64/android-ndk-r8d/sources/cxx-stl/gnu-libstdc++/4.6/include/cassert:
+/home/probigi/lib/android_ndk/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.6/include/cassert:
 
-/Users/dmitriy/workspace/adt-bundle-mac-x86_64/android-ndk-r8d/sources/cxx-stl/gnu-libstdc++/4.6/include/cmath:
+/home/probigi/lib/android_ndk/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.6/include/cmath:
 
-/Users/dmitriy/workspace/adt-bundle-mac-x86_64/android-ndk-r8d/sources/cxx-stl/gnu-libstdc++/4.6/include/cstdlib:
+/home/probigi/lib/android_ndk/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.6/include/cstdlib:
 
-/Users/dmitriy/workspace/adt-bundle-mac-x86_64/android-ndk-r8d/sources/cxx-stl/gnu-libstdc++/4.6/include/cstdio:
+/home/probigi/lib/android_ndk/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.6/include/cstdio:
 
-/Users/dmitriy/workspace/adt-bundle-mac-x86_64/android-ndk-r8d/sources/cxx-stl/gnu-libstdc++/4.6/include/cstdarg:
+/home/probigi/lib/android_ndk/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.6/include/cstdarg:
