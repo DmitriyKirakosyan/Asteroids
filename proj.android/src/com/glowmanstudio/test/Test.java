@@ -23,15 +23,19 @@ THE SOFTWARE.
 ****************************************************************************/
 package com.glowmanstudio.test;
 
-import org.cocos2dx.lib.Cocos2dxActivity;
+import android.content.Context;
+import android.util.Log;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
 import android.os.Bundle;
 
-public class Test extends Cocos2dxActivity{
+public class Test extends GPGSActivity{
+
+	static Context mContext;
 	
     protected void onCreate(Bundle savedInstanceState){
-		super.onCreate(savedInstanceState);	
+		super.onCreate(savedInstanceState);
+		mContext = Test.this;
 	}
 
     public Cocos2dxGLSurfaceView onCreateView() {
@@ -42,7 +46,57 @@ public class Test extends Cocos2dxActivity{
     	return glSurfaceView;
     }
 
-    static {
+	@Override
+	public void onSignInFailed() {
+		Log.e("Google Play onSignInFailed", "Oh NOOO! ");
+	}
+
+	@Override
+	public void onSignInSucceeded() {
+		Log.i("Google Play onSignInSucceeded", "FUCK YEAH!");
+	}
+
+
+
+	static {
         System.loadLibrary("cocos2dcpp");
-    }     
+    }
+
+	public static void gameServicesSignIn() {
+		((Test)mContext).runOnUiThread(new Runnable() {
+			public void run() {
+				((Test) mContext).beginUserInitiatedSignIn();
+			}
+		});
+
+	}
+
+	public static void updateTopScoreLeaderboard(int score) {
+		((Test)mContext).getGamesClient().submitScore("leaderboardid",
+				score);
+	}
+
+	public static void updateAchievement(String id, int percentage) {
+
+		((Test)mContext).getGamesClient().incrementAchievement(id,percentage);
+	}
+
+	public static void showLeaderboards() {
+		((Test)mContext).runOnUiThread(new Runnable() {
+			public void run() {
+				((Test)mContext).startActivityForResult(((Test)mContext).getGamesClient().getLeaderboardIntent("leaderboardidfromgoogleplay"), 5001);
+			}
+		});
+	}
+
+	public static void showAchievements() {
+		((Test)mContext).runOnUiThread(new Runnable() {
+			public void run() {
+				((Test)mContext).startActivityForResult(((Test)mContext).getGamesClient().getAchievementsIntent(), 5001);
+			}
+		});
+	}
+
+
 }
+
