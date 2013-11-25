@@ -23,6 +23,7 @@ THE SOFTWARE.
 ****************************************************************************/
 package com.glowmanstudio.asteroids;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
@@ -33,9 +34,18 @@ public class Test extends GPGSActivity{
 
 	static Context mContext;
 	
+	// tag for debug logging
+	final boolean ENABLE_DEBUG = true;
+
+	// request codes we use when invoking an external activity
+	public final int RC_RESOLVE = 5000, RC_UNUSED = 5001;
+	final String TAG = "Asteroids ProBigi";
+	
     protected void onCreate(Bundle savedInstanceState){
+    	enableDebugLog(ENABLE_DEBUG, TAG);
 		super.onCreate(savedInstanceState);
 		mContext = Test.this;
+		super.beginUserInitiatedSignIn();
 	}
 
     public Cocos2dxGLSurfaceView onCreateView() {
