@@ -2,6 +2,7 @@
 #include "asteroid/Asteroid.h"
 #include "MenuScene.h"
 #include "ScoreManager.h"
+#include "play_services/LeaderBoardService.h"
 
 USING_NS_CC;
 
@@ -39,6 +40,8 @@ bool GameScene::init()
 
     this->setTouchEnabled(true);
     this->scheduleUpdate();
+    
+    LeaderboardService::sharedLeaderboard()->showLeaderboards();
 
     return true;
 }

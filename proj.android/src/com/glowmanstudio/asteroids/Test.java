@@ -82,6 +82,7 @@ public class Test extends GPGSActivity{
 	}
 
 	public static void showLeaderboards() {
+		Log.i("hz", "show leaderboard");
 		((Test)mContext).runOnUiThread(new Runnable() {
 			public void run() {
 				((Test)mContext).startActivityForResult(((Test)mContext).getGamesClient().getLeaderboardIntent("leaderboardidfromgoogleplay"), 5001);
