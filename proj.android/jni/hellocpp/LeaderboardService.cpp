@@ -26,10 +26,13 @@ LeaderboardService* LeaderboardService::sharedLeaderboard()
 
 void LeaderboardService::showLeaderboards()
 {
+    CCLog("trying to call -- %s", CLASS_NAME);
 	JniMethodInfo methodInfo;
-	if (JniHelper::getStaticMethodInfo(methodInfo, CLASS_NAME, "showLeaderboards", "()Ljava/lang/String;"))
+	if (JniHelper::getStaticMethodInfo(methodInfo, CLASS_NAME, "showLeaderboards", "()V"))
 	{
-		methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID);
+		methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID);
 	}
 	methodInfo.env->DeleteLocalRef(methodInfo.classID);
+    CCLog("end call -- %s", CLASS_NAME);
+
 }
