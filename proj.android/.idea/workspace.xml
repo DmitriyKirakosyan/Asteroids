@@ -21,6 +21,9 @@
     <file path="$PROJECT_DIR$/../../../../talespin/client/src/ru/tria/talespin/view/screens/quest/QuestChatMediator.hx" changelist="ac4d2950-fd6c-4022-abfb-fe3d401134a5" time="1385331027563" ignored="false" />
     <file path="$PROJECT_DIR$/../../../../talespin/client/src/ru/tria/talespin/TalespinApplicationConfig.hx" changelist="ac4d2950-fd6c-4022-abfb-fe3d401134a5" time="1385331463224" ignored="false" />
     <file path="/LeaderboardService.cpp" changelist="ac4d2950-fd6c-4022-abfb-fe3d401134a5" time="1385387470581" ignored="false" />
+    <file path="$PROJECT_DIR$/../../../../talespin/client/src/ru/tria/talespin/view/mapscenes/islandmap/isolayer/BuildingIcon.hx" changelist="ac4d2950-fd6c-4022-abfb-fe3d401134a5" time="1385471207163" ignored="false" />
+    <file path="$PROJECT_DIR$/../../../../talespin/client/src/ru/tria/talespin/view/mapscenes/islandmap/FlightManager.hx" changelist="ac4d2950-fd6c-4022-abfb-fe3d401134a5" time="1385471235518" ignored="false" />
+    <file path="$PROJECT_DIR$/../../../../talespin/client/src/ru/tria/talespin/view/mapscenes/islandmap/IslandContentManager.hx" changelist="ac4d2950-fd6c-4022-abfb-fe3d401134a5" time="1385471235518" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,8 +87,10 @@
       <file leaf-file-name="Activity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../../../../adt-bundle-mac-x86_64/sdk/sources/android-18/android/app/Activity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="99" column="47" selection-start="3669" selection-end="3669" vertical-scroll-proportion="0.8662614">
+              <folding>
+                <element signature="e#36275#36302#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -103,7 +108,12 @@
         <entry file="file://$PROJECT_DIR$/../../../cocos2dx/platform/android/java/src/org/cocos2dx/lib/Cocos2dxHelper.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="348" column="33" selection-start="12401" selection-end="12401" vertical-scroll-proportion="0.0">
-              <folding />
+              <folding>
+                <element signature="n#!!doc" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#8317#8444#0" expanded="false" />
+                <element signature="e#8438#8439#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -502,12 +512,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="803" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.42459735" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.42459735" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37335286" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -679,7 +689,12 @@
     <entry file="file://$PROJECT_DIR$/../../../cocos2dx/platform/android/java/src/org/cocos2dx/lib/Cocos2dxHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="348" column="33" selection-start="12401" selection-end="12401" vertical-scroll-proportion="0.0">
-          <folding />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#8317#8444#0" expanded="false" />
+            <element signature="e#8438#8439#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -694,8 +709,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../../../../adt-bundle-mac-x86_64/sdk/sources/android-18/android/app/Activity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="99" column="47" selection-start="3669" selection-end="3669" vertical-scroll-proportion="0.8662614">
+          <folding>
+            <element signature="e#36275#36302#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

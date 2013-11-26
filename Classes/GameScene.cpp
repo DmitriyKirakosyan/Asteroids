@@ -72,9 +72,9 @@ void GameScene::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
 		for (int i = 0; i < _asteroids->count(); ++i) {
 			BaseAsteroid *aster = (BaseAsteroid*) _asteroids->objectAtIndex(i);
 			CCRect rect = aster->boundingBox();
-			CCLog("minX %f", rect.getMinX());
-			CCLog("maxX %f", rect.getMaxX());
-
+//			CCLog("minX %f", rect.getMinX());
+//			CCLog("maxX %f", rect.getMaxX());
+//
             //увеличиваем радиус тача для удобства.
             //TODO Перенести в класс Скина
 //            float rectW = rect.getMaxX() - rect.getMinX();
@@ -88,6 +88,7 @@ void GameScene::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
         CCObject* asteroidForRemove;
         CCARRAY_FOREACH(asteroidsForRemove, asteroidForRemove)
         {
+            ((CCSprite*)asteroidsForRemove)->stopAllActions();
             _asteroids->removeObject(asteroidForRemove);
         }
         asteroidsForRemove->removeAllObjects();
@@ -104,11 +105,10 @@ BaseAsteroid* GameScene::createAsteroid()
 
 void GameScene::onAsteroidMovingComplete(cocos2d::CCNode *pSender)
 {
-//    CCLog("asteroid was down..");
-
     this->removeChild(pSender);
     if (_asteroids->containsObject(pSender))
     {
+        ((CCSprite*)pSender)->stopAllActions();
         _asteroids->removeObject(pSender);
     }
 }
