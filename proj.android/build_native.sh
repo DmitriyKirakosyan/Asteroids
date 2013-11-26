@@ -30,6 +30,7 @@ done
 
 # paths
 
+NDK_ROOT="/home/probigi/lib/android_ndk/android-ndk-r9"
 
 if [ -z "${NDK_ROOT+aaa}" ];then
 echo "please define NDK_ROOT"

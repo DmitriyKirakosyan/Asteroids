@@ -6,12 +6,12 @@ LOCAL_MODULE := cocos2dcpp_shared
 
 LOCAL_MODULE_FILENAME := libcocos2dcpp
 
-LOCAL_SRC_FILES := hellocpp/main.cpp \
-                   hellocpp/LeaderboardService.cpp \
+LOCAL_SRC_FILES := asteroids/main.cpp \
+                   asteroids/LeaderboardService.cpp \
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/MenuScene.cpp \
                    ../../Classes/GameScene.cpp \
-                   ../../Classes/asteroid/Asteroid.cpp \
+                   ../../Classes/asteroid/BaseAsteroid.cpp \
                    ../../Classes/ScoreManager.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes

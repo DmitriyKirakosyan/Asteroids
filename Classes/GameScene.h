@@ -4,7 +4,7 @@
 #include "cocos2d.h"
 USING_NS_CC;
 
-class Asteroid;
+class BaseAsteroid;
 
 class GameScene : public cocos2d::CCLayer
 {
@@ -20,6 +20,8 @@ public:
     
 	virtual void ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent);
 
+	void onAsteroidMovingComplete(cocos2d::CCNode* pSender);
+
     CREATE_FUNC(GameScene);
 
 private:
@@ -29,8 +31,8 @@ private:
     
     void createAndDrawHP();
     
-    Asteroid* createAsteroid();
-    void onAsteroidMovingComplete(cocos2d::CCNode* pSender);
+    BaseAsteroid* createAsteroid();
+
 
     const int MAX_ASTERS;
     const int MAX_HP;

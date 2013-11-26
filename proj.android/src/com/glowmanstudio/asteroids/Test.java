@@ -45,7 +45,7 @@ public class Test extends GPGSActivity{
     	enableDebugLog(ENABLE_DEBUG, TAG);
 		super.onCreate(savedInstanceState);
 		mContext = Test.this;
-		super.beginUserInitiatedSignIn();
+		//super.beginUserInitiatedSignIn();
 	}
 
     public Cocos2dxGLSurfaceView onCreateView() {

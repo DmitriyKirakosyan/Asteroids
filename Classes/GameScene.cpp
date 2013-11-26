@@ -1,8 +1,8 @@
 #include "GameScene.h"
-#include "asteroid/Asteroid.h"
+#include "asteroid/BaseAsteroid.h"
 #include "MenuScene.h"
 #include "ScoreManager.h"
-#include "play_services/LeaderBoardService.h"
+#include "play_services/LeaderboardService.h"
 
 USING_NS_CC;
 
@@ -41,16 +41,13 @@ bool GameScene::init()
     this->setTouchEnabled(true);
     this->scheduleUpdate();
     
-    LeaderboardService::sharedLeaderboard()->showLeaderboards();
 
     return true;
 }
 
 void GameScene::update(float dt) {
-    
-    
 	for (int i = _asteroids->count(); i < MAX_ASTERS; ++i) {
-        Asteroid* asteroid = this->createAsteroid();
+		BaseAsteroid* asteroid = this->createAsteroid();
         _asteroids->addObject(asteroid);
         
         this->addChild(asteroid);
@@ -73,14 +70,16 @@ void GameScene::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
 		CCPoint target = touch->getLocation();
 
 		for (int i = 0; i < _asteroids->count(); ++i) {
-			Asteroid *aster = (Asteroid*) _asteroids->objectAtIndex(i);
+			BaseAsteroid *aster = (BaseAsteroid*) _asteroids->objectAtIndex(i);
 			CCRect rect = aster->boundingBox();
+			CCLog("minX %f", rect.getMinX());
+			CCLog("maxX %f", rect.getMaxX());
 
             //увеличиваем радиус тача для удобства.
             //TODO Перенести в класс Скина
-            float rectW = rect.getMaxX() - rect.getMinX();
-            float rectH = rect.getMaxY() - rect.getMinY();
-            rect.setRect(rect.getMinX() - rectW, rect.getMinY() - rectH, rectW * 3, rectH * 3);
+//            float rectW = rect.getMaxX() - rect.getMinX();
+//            float rectH = rect.getMaxY() - rect.getMinY();
+//            rect.setRect(rect.getMinX() - rectW, rect.getMinY() - rectH, rectW * 2, rectH * 2);
 			if (rect.containsPoint(target)) {
                 this->removeChild(aster);
                 asteroidsForRemove->addObject(aster);
@@ -95,30 +94,18 @@ void GameScene::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
 	}
 }
 
-Asteroid* GameScene::createAsteroid()
+BaseAsteroid* GameScene::createAsteroid()
 {
-    Asteroid* result = new Asteroid();
-    
-    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
-    float randomX = CCRANDOM_0_1() * visibleSize.width;
-    result->setPosition(ccp(origin.x + randomX,
-                            origin.y + visibleSize.height + result->getContentSize().height/2));
-    
-    CCMoveTo* moveAction = CCMoveTo::create(2, ccp(randomX, origin.y - result->getContentSize().height/2));
-    SEL_CallFuncN onMoveToPointCompleteFunc = callfuncN_selector(GameScene::onAsteroidMovingComplete);
-    CCCallFuncN* onComplete = CCCallFuncN::create(this, onMoveToPointCompleteFunc);
-    CCFiniteTimeAction* asteroidAction = CCSequence::create(moveAction, onComplete, NULL);
-    
-    result->runAction(asteroidAction);
-    
+	BaseAsteroid* result = new BaseAsteroid(this);
+    result->setRandomDirection();
+
     return result;
 }
 
 void GameScene::onAsteroidMovingComplete(cocos2d::CCNode *pSender)
 {
-    CCLog("asteroid was down..");
-    
+//    CCLog("asteroid was down..");
+
     this->removeChild(pSender);
     if (_asteroids->containsObject(pSender))
     {
