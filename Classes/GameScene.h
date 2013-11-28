@@ -33,6 +33,7 @@ private:
     
     BaseAsteroid* createAsteroid();
 
+    void killLife(int count);
 
     const int MAX_ASTERS;
     const int MAX_HP;

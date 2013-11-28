@@ -34,5 +34,16 @@ void LeaderboardService::showLeaderboards()
 	}
 	methodInfo.env->DeleteLocalRef(methodInfo.classID);
     CCLog("end call -- %s", CLASS_NAME);
+}
 
+void LeaderboardService::updateTopScoreLeaderboard(int score)
+{
+	CCLog("trying to call -- %s", CLASS_NAME);
+	JniMethodInfo methodInfo;
+	if (JniHelper::getStaticMethodInfo(methodInfo, CLASS_NAME, "updateTopScoreLeaderboard", "(I)V"))
+	{
+		methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, score);
+	}
+	methodInfo.env->DeleteLocalRef(methodInfo.classID);
+	CCLog("end call -- %s", CLASS_NAME);
 }

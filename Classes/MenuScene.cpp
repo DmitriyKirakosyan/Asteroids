@@ -9,6 +9,7 @@
 #include "MenuScene.h"
 #include "GameScene.h"
 #include "ScoreManager.h"
+#include "play_services/LeaderboardService.h"
 
 USING_NS_CC;
 
@@ -98,6 +99,7 @@ void MenuScene::startGame()
 void MenuScene::openStore()
 {
     CCLog("Nothing here yet");
+    LeaderboardService::sharedLeaderboard()->showLeaderboards();
 }
 
 void MenuScene::showScore()

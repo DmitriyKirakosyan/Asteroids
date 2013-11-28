@@ -14,6 +14,8 @@ public:
 	BaseAsteroid(CCLayer * parent);
 
 	void setRandomDirection();
+	void setRotationTo(float x, float y);
+	CCRect getHitArea();
 private:
 	CCLayer* _parent;
 

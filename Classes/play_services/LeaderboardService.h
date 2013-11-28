@@ -46,9 +46,9 @@ class EXPORT_DLL LeaderboardService
 {
     public:
         void showLeaderboards();
-        
+        void updateTopScoreLeaderboard(int score);
+
         static LeaderboardService* sharedLeaderboard();
-        
 };
     
 //} // end of namespace CocosDenshion

@@ -8,6 +8,7 @@
 
 #include "ScoreManager.h"
 #include "cocos2d.h"
+#include "play_services/LeaderboardService.h"
 
 USING_NS_CC;
 
@@ -25,6 +26,7 @@ void ScoreManager::saveScore(int score)
     int oldScore = userData->getIntegerForKey(SCORE_KEY);
     if (score > oldScore)
     {
+    	LeaderboardService::sharedLeaderboard()->updateTopScoreLeaderboard(score);
         userData->setIntegerForKey(SCORE_KEY, score);
         userData->flush();
     }

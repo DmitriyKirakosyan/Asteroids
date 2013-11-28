@@ -23,7 +23,6 @@ THE SOFTWARE.
 ****************************************************************************/
 package com.glowmanstudio.asteroids;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
@@ -33,6 +32,8 @@ import android.os.Bundle;
 public class Test extends GPGSActivity{
 
 	static Context mContext;
+	
+	private static String leaderboard = "CgkIvJqproAUEAIQAg";
 	
 	// tag for debug logging
 	final boolean ENABLE_DEBUG = true;
@@ -45,7 +46,7 @@ public class Test extends GPGSActivity{
     	enableDebugLog(ENABLE_DEBUG, TAG);
 		super.onCreate(savedInstanceState);
 		mContext = Test.this;
-		//super.beginUserInitiatedSignIn();
+		super.beginUserInitiatedSignIn();
 	}
 
     public Cocos2dxGLSurfaceView onCreateView() {
@@ -82,8 +83,8 @@ public class Test extends GPGSActivity{
 	}
 
 	public static void updateTopScoreLeaderboard(int score) {
-		((Test)mContext).getGamesClient().submitScore("leaderboardid",
-				score);
+		Log.i("hz", "updateTopScoreLeaderboard: " + score);
+		((Test)mContext).getGamesClient().submitScore(leaderboard, score);
 	}
 
 	public static void updateAchievement(String id, int percentage) {
@@ -95,7 +96,8 @@ public class Test extends GPGSActivity{
 		Log.i("hz", "show leaderboard");
 		((Test)mContext).runOnUiThread(new Runnable() {
 			public void run() {
-				((Test)mContext).startActivityForResult(((Test)mContext).getGamesClient().getLeaderboardIntent("leaderboardidfromgoogleplay"), 5001);
+				((Test)mContext).startActivityForResult(((Test)mContext).getGamesClient().getAllLeaderboardsIntent(), 5001);
+//				((Test)mContext).startActivityForResult(((Test)mContext).getGamesClient().getLeaderboardIntent("leaderboardidfromgoogleplay"), 5001);
 			}
 		});
 	}

@@ -52,7 +52,6 @@ void GameScene::update(float dt) {
         
         this->addChild(asteroid);
 	}
-    
 }
 
 void GameScene::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
@@ -71,21 +70,19 @@ void GameScene::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
 
 		for (int i = 0; i < _asteroids->count(); ++i) {
 			BaseAsteroid *aster = (BaseAsteroid*) _asteroids->objectAtIndex(i);
-			CCRect rect = aster->boundingBox();
-//			CCLog("minX %f", rect.getMinX());
-//			CCLog("maxX %f", rect.getMaxX());
-//
-            //увеличиваем радиус тача для удобства.
-            //TODO Перенести в класс Скина
-//            float rectW = rect.getMaxX() - rect.getMinX();
-//            float rectH = rect.getMaxY() - rect.getMinY();
-//            rect.setRect(rect.getMinX() - rectW, rect.getMinY() - rectH, rectW * 2, rectH * 2);
+			CCRect rect = aster->getHitArea();
+
 			if (rect.containsPoint(target)) {
+				CCLog("NEED TO REMOVE!!!");
+				_score++;
+				aster->stopAllActions();
                 this->removeChild(aster);
-                asteroidsForRemove->addObject(aster);
+                _asteroids->removeObject(aster);
+//                asteroidsForRemove->addObject(aster);
 			}
 		}
-        CCObject* asteroidForRemove;
+		//TODO something went wrong in this code
+		CCObject* asteroidForRemove;
         CCARRAY_FOREACH(asteroidsForRemove, asteroidForRemove)
         {
             ((CCSprite*)asteroidsForRemove)->stopAllActions();
@@ -110,7 +107,23 @@ void GameScene::onAsteroidMovingComplete(cocos2d::CCNode *pSender)
     {
         ((CCSprite*)pSender)->stopAllActions();
         _asteroids->removeObject(pSender);
+
+        this->killLife(1);
     }
+}
+
+void GameScene::killLife(int count) {
+	for (int i = _lifeSprites->count() - 1; i >= 0; i--) {
+		CCSprite* life = (CCSprite*)_lifeSprites->objectAtIndex(i);
+		this->removeChild(life);
+		_lifeSprites->removeObject(life);
+		count--;
+		if (count <= 0) { return; }
+	}
+	if (_lifeSprites->count() <= 0 && !_gameOver) {
+		_gameOver = true;
+		showScore();
+	}
 }
 
 void GameScene::createAndDrawHP()
@@ -132,6 +145,8 @@ void GameScene::createAndDrawHP()
 
 void GameScene::showScore()
 {
+	ScoreManager::getInstance()->saveScore(_score);
+
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
     CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
 
