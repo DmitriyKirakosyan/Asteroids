@@ -14,44 +14,16 @@
 #include <typeinfo>
 #include <ctype.h>
 #include <string.h>
-
-//namespace CocosDenshion {
-//    
-//    class TypeInfo
-//    {
-//    public:
-//        virtual long getClassTypeInfo() = 0;
-//    };
-//    
-//    static inline unsigned int getHashCodeByString(const char *key)
-//    {
-//        unsigned int len = strlen(key);
-//        const char *end=key+len;
-//        unsigned int hash;
-//        
-//        for (hash = 0; key < end; key++)
-//        {
-//            hash *= 16777619;
-//            hash ^= (unsigned int) (unsigned char) toupper(*key);
-//        }
-//        return (hash);
-//    }
-
-    /**
-     @class          SimpleAudioEngine
-     @brief          offer a VERY simple interface to play background music & sound effect
-     */
-    
 class EXPORT_DLL LeaderboardService
 {
-    public:
-        void showLeaderboards();
-        void updateTopScoreLeaderboard(int score);
+public:
+    void showLeaderboards();
+    void submitScore(int score);
 
-        static LeaderboardService* sharedLeaderboard();
-};
+    static LeaderboardService* sharedLeaderboard();
     
-//} // end of namespace CocosDenshion
+private:
+};
 
 
 #endif

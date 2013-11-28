@@ -36,7 +36,7 @@ void LeaderboardService::showLeaderboards()
     CCLog("end call -- %s", CLASS_NAME);
 }
 
-void LeaderboardService::updateTopScoreLeaderboard(int score)
+void LeaderboardService::submitScore(int score)
 {
 	CCLog("trying to call -- %s", CLASS_NAME);
 	JniMethodInfo methodInfo;

@@ -26,7 +26,7 @@ void ScoreManager::saveScore(int score)
     int oldScore = userData->getIntegerForKey(SCORE_KEY);
     if (score > oldScore)
     {
-    	LeaderboardService::sharedLeaderboard()->updateTopScoreLeaderboard(score);
+    	LeaderboardService::sharedLeaderboard()->submitScore(score);
         userData->setIntegerForKey(SCORE_KEY, score);
         userData->flush();
     }
