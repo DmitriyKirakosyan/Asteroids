@@ -36,6 +36,16 @@ bool GameScene::init()
     _score = 0;
     _gameOver = false;
 
+
+    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+	CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
+    CCSprite *bckg = CCSprite::create("game/background_night.png");
+    CCSize size = bckg->getContentSize();
+    bckg->setScaleX(visibleSize.width/size.width);
+    bckg->setScaleY(visibleSize.height/size.height);
+    bckg->setPosition(ccp(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    this->addChild(bckg);
+
     this->createAndDrawHP();
 
     this->setTouchEnabled(true);

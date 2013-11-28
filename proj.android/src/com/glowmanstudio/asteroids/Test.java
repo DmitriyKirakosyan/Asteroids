@@ -97,7 +97,6 @@ public class Test extends GPGSActivity{
 		((Test)mContext).runOnUiThread(new Runnable() {
 			public void run() {
 				((Test)mContext).startActivityForResult(((Test)mContext).getGamesClient().getAllLeaderboardsIntent(), 5001);
-//				((Test)mContext).startActivityForResult(((Test)mContext).getGamesClient().getLeaderboardIntent("leaderboardidfromgoogleplay"), 5001);
 			}
 		});
 	}
