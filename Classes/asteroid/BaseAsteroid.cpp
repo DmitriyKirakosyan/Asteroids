@@ -1,13 +1,40 @@
 
 #include "BaseAsteroid.h"
 #include "GameScene.h"
+#include "GameBalance.h"
+#include "GreenAsteroid.h"
+
+const int BaseAsteroid::BASE_MAX_SPEED = 15;
+const int BaseAsteroid::BASE_MIN_SPEED = 2;
 
 
-BaseAsteroid::BaseAsteroid(CCLayer * parent)
+BaseAsteroid* BaseAsteroid::createAsteroid(cocos2d::CCLayer *parent, int gameSection)
+{
+    float greenAsetrCoef = 0;
+    if (gameSection > 0)
+    {
+        greenAsetrCoef = gameSection / 4.0;
+    }
+    BaseAsteroid* result;
+    int type = (CCRANDOM_0_1() < greenAsetrCoef) ? 1 : 0;
+    result = new BaseAsteroid(parent, type);
+    
+    return result;
+}
+
+BaseAsteroid::BaseAsteroid(CCLayer * parent, int type)
 {
 		CCSprite::init();
-		_pic1 = CCSprite::create("game/asteroid/green_small_1.png");
-        _pic2 = CCSprite::create("game/asteroid/green_small_2.png");
+        if (type == 0)
+        {
+            _pic1 = CCSprite::create("game/asteroid/blue_small_1.png");
+            _pic2 = CCSprite::create("game/asteroid/blue_small_2.png");
+        }
+        else
+        {
+            _pic1 = CCSprite::create("game/asteroid/green_small_1.png");
+            _pic2 = CCSprite::create("game/asteroid/green_small_2.png");
+        }
 
         this->addChild(_pic1);
         this->addChild(_pic2);
@@ -31,6 +58,8 @@ BaseAsteroid::BaseAsteroid(CCLayer * parent)
 
 CCRect BaseAsteroid::getHitArea() {
 	CCSize size = _pic1->getContentSize();
+    size.width *= this->getScale();
+    size.height *= this->getScale();
 	float x = this->getPositionX() - size.width/2;
 	float y = this->getPositionY() - size.height/2;
 	CCRect rect = CCRectMake(x,y,size.width,size.height);
@@ -39,7 +68,7 @@ CCRect BaseAsteroid::getHitArea() {
 }
 
 
-void BaseAsteroid::setRandomDirection()
+void BaseAsteroid::setRandomDirection(int gameSection)
 {
 	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
 	CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
@@ -49,7 +78,10 @@ void BaseAsteroid::setRandomDirection()
 
 	randomX = CCRANDOM_0_1() * visibleSize.width;
 	float posY = origin.y - this->getContentSize().height/2;
-	float speed = 5 * CCRANDOM_0_1() + 2;
+    
+    float maxSpeedCoef = 1.0 / GameBalance::SECTION_SPEEDS[gameSection];
+    float maxSpeed  = BASE_MAX_SPEED * maxSpeedCoef;
+	float speed = (maxSpeed - BASE_MIN_SPEED) * CCRANDOM_0_1() + BASE_MIN_SPEED;
 	CCMoveTo* moveAction = CCMoveTo::create(speed, ccp(randomX, posY));
 	this->setRotationTo(randomX, posY);
 	SEL_CallFuncN onMoveToPointCompleteFunc = callfuncN_selector(GameScene::onAsteroidMovingComplete);
@@ -57,6 +89,12 @@ void BaseAsteroid::setRandomDirection()
 	CCFiniteTimeAction* asteroidAction = CCSequence::create(moveAction, onComplete, NULL);
 
 	this->runAction(asteroidAction);
+    
+    
+    //scale animation by screen fragments;
+    
+    CCScaleTo* scaleAnimation = CCScaleTo::create(speed, 2);
+    this->runAction(scaleAnimation);
 }
 
 void BaseAsteroid::setRotationTo(float x, float y) {

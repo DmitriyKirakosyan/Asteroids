@@ -3,6 +3,7 @@
 #include "MenuScene.h"
 #include "ScoreManager.h"
 #include "play_services/LeaderboardService.h"
+#include "balance/GameBalance.h"
 
 USING_NS_CC;
 
@@ -35,6 +36,7 @@ bool GameScene::init()
     
     _score = 0;
     _gameOver = false;
+    _gameTime = 0;
 
 
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
@@ -56,6 +58,7 @@ bool GameScene::init()
 }
 
 void GameScene::update(float dt) {
+    _gameTime += dt;
 	for (int i = _asteroids->count(); i < MAX_ASTERS; ++i) {
 		BaseAsteroid* asteroid = this->createAsteroid();
         _asteroids->addObject(asteroid);
@@ -83,19 +86,24 @@ void GameScene::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
 			CCRect rect = aster->getHitArea();
 
 			if (rect.containsPoint(target)) {
-				CCLog("NEED TO REMOVE!!!");
-				_score++;
-				aster->stopAllActions();
+				
+                if (aster->getScale() < 1.3) {
+                    _score += 5;
+                }
+                else if (aster->getScale() < 1.6)
+                {
+                    _score += 3;
+                }
+                else _score++;
+				
+                aster->stopAllActions();
                 this->removeChild(aster);
-                _asteroids->removeObject(aster);
-//                asteroidsForRemove->addObject(aster);
+                asteroidsForRemove->addObject(aster);
 			}
 		}
-		//TODO something went wrong in this code
 		CCObject* asteroidForRemove;
         CCARRAY_FOREACH(asteroidsForRemove, asteroidForRemove)
         {
-            ((CCSprite*)asteroidsForRemove)->stopAllActions();
             _asteroids->removeObject(asteroidForRemove);
         }
         asteroidsForRemove->removeAllObjects();
@@ -104,8 +112,8 @@ void GameScene::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
 
 BaseAsteroid* GameScene::createAsteroid()
 {
-	BaseAsteroid* result = new BaseAsteroid(this);
-    result->setRandomDirection();
+	BaseAsteroid* result = BaseAsteroid::createAsteroid(this, this->getCurrentSection());
+    result->setRandomDirection(this->getCurrentSection());
 
     return result;
 }
@@ -165,6 +173,20 @@ void GameScene::showScore()
     label->setPosition(ccp(origin.x + visibleSize.width/2, origin.y + visibleSize.height/2));
     this->addChild(label);
     delete scoreString;
+}
+
+int GameScene::getCurrentSection()
+{
+    int result = 0;
+    for (int i = GameBalance::SECTIONS_NUM - 1; i >0; --i)
+    {
+        if (_gameTime - GameBalance::SECTION_TIMES[i] > 0)
+        {
+            result = i;
+            break;
+        }
+    }
+    return result;
 }
 
 void GameScene::menuCloseCallback(CCObject* pSender)

@@ -33,22 +33,22 @@ bool MenuScene::init()
                                                           "interface/menu/playBtn.png",
                                                           this,
                                                           menu_selector(MenuScene::playBtnHandler));
-	playBtn->setPosition(ccp(origin.x + + playBtn->getContentSize().width/2 + 50 ,
-                                origin.y + 3 * partHeight - partHeight/2));
+	playBtn->setPosition(ccp(origin.x + visibleSize.width/3 ,
+                                origin.y + visibleSize.height/2));
 
     CCMenuItemImage *playInfiniteBtn = CCMenuItemImage::create("interface/menu/playInfiniteBtn.png",
                                                        "interface/menu/playInfiniteBtn.png",
                                                        this,
                                                        menu_selector(MenuScene::playInfiniteBtnHandler));
-	playInfiniteBtn->setPosition(ccp(origin.x + + playInfiniteBtn->getContentSize().width/2 + 100 ,
-                             origin.y + 2 * partHeight - partHeight/2));
+	playInfiniteBtn->setPosition(ccp(origin.x + visibleSize.width/3 * 2 ,
+                             origin.y + origin.y + visibleSize.height/2));
 
     CCMenuItemImage *storeBtn = CCMenuItemImage::create("interface/menu/storeBtn.png",
                                                        "interface/menu/storeBtn.png",
                                                        this,
                                                        menu_selector(MenuScene::storeBtnHandler));
-	storeBtn->setPosition(ccp(origin.x + + storeBtn->getContentSize().width/2 + 150 ,
-                             origin.y + partHeight/2));
+	storeBtn->setPosition(ccp(origin.x + visibleSize.width/2,
+                             origin.y + visibleSize.height/4));
 
     
     // create menu, it's an autorelease object
@@ -112,8 +112,8 @@ void MenuScene::showScore()
 
         CCString* bestScoreStr = CCString::createWithFormat("best score: %d", score);
         CCLabelTTF* label = CCLabelTTF::create(bestScoreStr->getCString(), "Helvetica", 24);
-        label->setPosition(ccp(origin.x + visibleSize.width - label->getContentSize().width/2 - 20,
-                               origin.y + visibleSize.height/2));
+        label->setPosition(ccp(origin.x + visibleSize.width/2 - label->getContentSize().width/2,
+                               origin.y + visibleSize.height - label->getContentSize().height/2 - 30));
         this->addChild(label);
         
         delete bestScoreStr;

@@ -21,6 +21,8 @@ public:
 	virtual void ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent);
 
 	void onAsteroidMovingComplete(cocos2d::CCNode* pSender);
+    
+    int getCurrentSection();
 
     CREATE_FUNC(GameScene);
 
@@ -40,6 +42,8 @@ private:
     
     bool _gameOver;
     int _score;
+    
+    float _gameTime;
     
     CCArray *_asteroids;
     
